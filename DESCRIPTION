@@ -1,11 +1,9 @@
 Package: stepWoe
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Step  that calculates WOES as part of a tidymodel recipe
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Rafael Monge
+Description: Step  that calculates WOES as part of a tidymodel recipe
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -14,4 +12,4 @@ Depends:
   dplyr,
   recipes,
   Information
-
+RoxygenNote: 6.0.1
