@@ -10,5 +10,8 @@ License: CC0
 Encoding: UTF-8
 LazyData: true
 Imports:
-	Information
-	tidymodels
+  rlang
+  dplyr
+  recipes
+  Information
+

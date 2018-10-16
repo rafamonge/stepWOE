@@ -114,8 +114,8 @@ step_WOE_new <-
 #' @export
 prep.step_WOE <- function(x, training, info = NULL, ...) {
 
-  x_names <- terms_select(x$terms, info = info)
-  y_names <- terms_select(x$outcome, info = info)
+  x_names <- recipes::terms_select(x$terms, info = info)
+  y_names <- recipes::terms_select(x$outcome, info = info)
   col_names <- c(x_names, y_names)
   numberOfFactors = sapply(training %>% select(!!x_names), is.factor)
   if(sum(numberOfFactors) != length(numberOfFactors)){
