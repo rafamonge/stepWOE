@@ -13,6 +13,7 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
+
 #' @export
 woeTransformDefault = function(x){
   if(is.factor(x)){
@@ -23,7 +24,50 @@ woeTransformDefault = function(x){
   }
 
 }
+
+#' Centering Numeric Data
+#'
+#' `step_WOE` creates a *specification* of a recipe
+#'  step that will return WOES for factor variables.
+#'
+#' @param recipe A recipe object. The step will be added to the
+#'  sequence of operations for this recipe.
+#' @param ... One or more selector functions to choose which
+#'  variables are affected by the step. See [selections()]
+#'  for more details. For the `tidy` method, these are not
+#'  currently used.
+#' @param role Not used by this step since no new variables are
+#'  created.
+#' @param trained A logical to indicate if the quantities for
+#'  preprocessing have been estimated.
+#' @param woes An object returned by the Information package.
+#' @param outcome Specifes the name of the column to use as the outcome when calculatint the WOEs
+#' @param outcomeTransformtion a function to process the outcome variable before passing it to the Information pacakge
+#' @param skip A logical. Should the step be skipped when the
+#'  recipe is baked by [bake.recipe()]? While all operations are baked
+#'  when [prep.recipe()] is run, some operations may not be able to be
+#'  conducted on new data (e.g. processing the outcome variable(s)).
+#'  Care should be taken when using `skip = TRUE` as it may affect
+#'  the computations for subsequent operations
+#' @param id A character string that is unique to this step to identify it.
+#' @return An updated version of `recipe` with the new step
+#'  added to the sequence of existing steps (if any). For the
+#'  `tidy` method, a tibble with columns `terms` (the
+#'  selectors or variables selected) and `value` (the means).
+#'
+#' @keywords datagen
+#' @concept preprocessing WOEs IV
 #' @export
+#' @examples
+#' rec = recipe(Status ~ Seniority + Marital + Records + Job, data = credit_data)
+#' rec = rec %>% step_WOE(Marital,Records,Job,outcome="Status")
+#' rec =rec %>% prep(training=credit_data)
+#' bake(rec, newdata = credit_data)
+#'
+#' @seealso [recipe()] [prep.recipe()]
+#'   [bake.recipe()]
+
+
 step_WOE <-
   function(recipe,
            ...,
@@ -114,10 +158,7 @@ bake.step_WOE <- function(object, newdata, ...) {
 
 }
 
-rec = recipe(Status ~ Seniority + Marital + Records + Job, data = credit_data)
-rec = rec %>% step_WOE(Marital,Records,Job,outcome="Status")
-rec =rec %>% prep(training=credit_data)
-#bake(rec, newdata = credit_data)
+
 
 #' @export
 print.step_WOE <-
