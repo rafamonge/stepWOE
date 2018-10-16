@@ -1,6 +1,6 @@
 # Hello, world!
 #
-# This is an example function named 'hello' 
+# This is an example function named 'hello'
 # which prints 'Hello, world!'.
 #
 # You can learn more about package authoring with RStudio at:
@@ -13,12 +13,7 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-hello <- function() {
-  print("Hello, world!")
-}
-
-
-
+#' @export
 woeTransformDefault = function(x){
   if(is.factor(x)){
     as.numeric(x) -1
@@ -28,7 +23,7 @@ woeTransformDefault = function(x){
   }
 
 }
-
+#' @export
 step_WOE <-
   function(recipe,
            ...,
@@ -55,6 +50,7 @@ step_WOE <-
 
 
 # Initializes a new object
+#' @export
 step_WOE_new <-
   function(terms, role, trained, woes,outcome,outcomeTransform, skip, id) {
     step(
@@ -71,7 +67,7 @@ step_WOE_new <-
   }
 
 
-
+#' @export
 prep.step_WOE <- function(x, training, info = NULL, ...) {
 
   x_names <- terms_select(x$terms, info = info)
@@ -102,7 +98,7 @@ prep.step_WOE <- function(x, training, info = NULL, ...) {
     id = x$id
   )
 }
-
+#' @export
 bake.step_WOE <- function(object, newdata, ...) {
   #print("BAking!")
   for(val in names(object$woes$Tables)){
@@ -123,7 +119,7 @@ rec = rec %>% step_WOE(Marital,Records,Job,outcome="Status")
 rec =rec %>% prep(training=credit_data)
 #bake(rec, newdata = credit_data)
 
-
+#' @export
 print.step_WOE <-
   function(x, width = max(20, options()$width - 30), ...) {
     cat("WOE for ", sep = "")
