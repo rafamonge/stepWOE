@@ -192,3 +192,21 @@ tidy.step_WOE <- function(x, ...) {
   res$id <- x$id
   res
 }
+
+rand_id <- function(prefix = "step", len = 5) {
+  candidates <- c(letters, LETTERS, paste(0:9))
+  paste(prefix,
+        paste0(sample(candidates, len, replace = TRUE), collapse = ""),
+        sep = "_"
+  )
+}
+
+
+ellipse_check <- function(...) {
+  terms <- quos(...)
+  if (is_empty(terms))
+    stop("Please supply at least one variable specification.",
+         "See ?selections.",
+         call. = FALSE)
+  terms
+}
